@@ -1,25 +1,28 @@
+import tasks.*;
+
 public class Main {
     public static void main(String[] args){
         Manager manager = new Manager();
 
-        Epic firstEpic = new Epic(null, null, 0);
-        Epic secondEpic = new Epic(null, null, 0);
-        Task firstTask = new Task(null, null, 0, Status.NEW);
-        Task secondTask = new Task(null, null, 0, Status.NEW);
-        Subtask firstSubtask = new Subtask(null, null, 0, Status.NEW, firstEpic);
-        Subtask secondSubtask = new Subtask(null, null, 0, Status.NEW, firstEpic);
-        Subtask thirdSubtask = new Subtask(null, null, 0, Status.NEW, secondEpic);
+        Epic firstEpic = new Epic("Сдать летнюю сессию", "Заботать все предметы, чтобы не вылететь из вуза");
+        Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
+        manager.makeEpic(firstEpic);
+        manager.makeEpic(secondEpic);
 
-        manager.makeEpic("Сдать летнюю сессию", "Заботать все предметы, чтобы не вылететь из вуза", firstEpic);
-        manager.makeEpic("Купить подарок", "Купить подарок для своего одногруппника", secondEpic);
-        manager.makeTask("Уборка", "Прибрать комнату перед отъездом из общежития", Status.IN_PROGRESS, firstTask);
-        manager.makeTask("Собрать вещи", "Собрать вещи для переезда в СПб на месяц", Status.NEW, secondTask);
-        manager.makeSubtask("Заботать линал", "Заботать линейные операторы, квадрики и коники",
-                            Status.IN_PROGRESS, firstSubtask, firstEpic);
-        manager.makeSubtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
-                            Status.IN_PROGRESS, secondSubtask, firstEpic);
-        manager.makeSubtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
-                            Status.DONE, thirdSubtask, secondEpic);
+        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц");
+        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники");
+        manager.makeTask(Status.IN_PROGRESS, firstTask);
+        manager.makeTask(Status.NEW, secondTask);
+
+        Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники",
+                                            firstEpic.getId(), manager);
+        Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
+                                            firstEpic.getId(), manager);
+        Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
+                                            secondEpic.getId(), manager);
+        manager.makeSubtask(Status.IN_PROGRESS, firstSubtask);
+        manager.makeSubtask(Status.IN_PROGRESS, secondSubtask);
+        manager.makeSubtask(Status.DONE, thirdSubtask);
 
         System.out.println("Печать всех задач");
         System.out.println(manager.getAllTasks());

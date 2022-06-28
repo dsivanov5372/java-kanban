@@ -1,12 +1,16 @@
+package tasks;
+
 import java.util.Objects;
 
-public class Subtask extends Task{
-    private Epic parentEpic;
+public class Subtask extends Task {
+    private int parentEpic;
+    private Manager manager;
 
-    public Subtask(String title, String details, int id, Status status, Epic epic) {
-        super(title, details, id, status);
-        parentEpic = epic;
-        parentEpic.addSubtask(this);
+    public Subtask(String title, String details, int parentEpic, Manager manager) {
+        super(title, details);
+        this.parentEpic = parentEpic;
+        this.manager = manager;
+        (this.manager.getEpicById(parentEpic)).addSubtask(this);
     }
 
     @Override
@@ -26,19 +30,27 @@ public class Subtask extends Task{
 
     @Override
     public String toString(){
-        return "{" + super.toString() + "\nEpic id: " + parentEpic.getId() + "}";
+        return "{" + super.toString() + "\nEpic id: " + parentEpic + "}";
     }
 
     @Override
     public void setStatus(Status status){
         this.status = status;
-        parentEpic.changeStatus(this);
+        (manager.getEpicById(parentEpic)).changeStatus(this);
     }
 
-    public void setParentEpic(Epic epic){
+    public void setParentEpic(int epic){
         parentEpic = epic;
     }
-    public Epic getParentEpic(){
+    public int getParentEpic(){
         return parentEpic;
+    }
+
+    public void setManager(Manager manager){
+        this.manager = manager;
+    }
+
+    public Manager getManager(Manager manager){
+        return manager;
     }
 }

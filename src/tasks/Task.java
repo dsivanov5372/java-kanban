@@ -1,3 +1,5 @@
+package tasks;
+
 import java.util.Objects;
 
 public class Task {
@@ -6,11 +8,9 @@ public class Task {
     protected int id;
     protected Status status;
 
-    public Task(String title, String details, int id, Status status){
+    public Task(String title, String details){
         this.title = title;
         this.details = details;
-        this.id = id;
-        this.status = status;
     }
 
     @Override
