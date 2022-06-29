@@ -1,3 +1,4 @@
+import managment.Manager;
 import tasks.*;
 
 public class Main {
@@ -14,12 +15,9 @@ public class Main {
         manager.makeTask(Status.IN_PROGRESS, firstTask);
         manager.makeTask(Status.NEW, secondTask);
 
-        Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники",
-                                            firstEpic.getId(), manager);
-        Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
-                                            firstEpic.getId(), manager);
-        Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
-                                            secondEpic.getId(), manager);
+        Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники", firstEpic);
+        Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?", firstEpic);
+        Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать", secondEpic);
         manager.makeSubtask(Status.IN_PROGRESS, firstSubtask);
         manager.makeSubtask(Status.IN_PROGRESS, secondSubtask);
         manager.makeSubtask(Status.DONE, thirdSubtask);

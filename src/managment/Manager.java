@@ -1,4 +1,9 @@
-package tasks;
+package managment;
+import tasks.Epic;
+import tasks.Status;
+import tasks.Subtask;
+import tasks.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,6 +27,7 @@ public class Manager {
     }
 
     public void makeTask(Status status, Task task){
+        task.setStatus(status);
         task.setId(idSetter);
         idSetter++;
 
@@ -29,11 +35,10 @@ public class Manager {
             tasks = new HashMap<>();
         }
         tasks.put(task.getId(), task);
-
-        task.setStatus(status);
     }
 
     public void makeSubtask(Status status, Subtask subtask){
+        subtask.setStatus(status);
         subtask.setId(idSetter);
         idSetter++;
 
@@ -41,8 +46,6 @@ public class Manager {
             subtasks = new HashMap<>();
         }
         subtasks.put(subtask.getId(), subtask);
-
-        subtask.setStatus(status);
     }
 
     public ArrayList<Epic> getAllEpics(){
@@ -76,7 +79,7 @@ public class Manager {
 
     public void deleteAllSubtasks(){
         for (Subtask subtask : subtasks.values()){
-            epics.get(subtask.getParentEpic()).removeSubtask(subtask);
+            epics.get(subtask.getParentEpic().getId()).removeSubtask(subtask);
         }
         subtasks.clear();
     }
@@ -131,7 +134,7 @@ public class Manager {
     }
 
     public void deleteSubtaskById(int id){
-        epics.get(subtasks.get(id).getParentEpic()).removeSubtask(subtasks.get(id));
+        (epics.get(subtasks.get(id).getParentEpic().getId())).removeSubtask(subtasks.get(id));
         subtasks.remove(id);
     }
 }
