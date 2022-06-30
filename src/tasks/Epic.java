@@ -70,7 +70,9 @@ public class Epic extends Task {
         if(subtasks.isEmpty()){
             status = Status.NEW;
         } else {
-            changeStatus(subtasks.get(0));
+            for (Subtask task : subtasks) {
+                changeStatus(task);
+            }
         }
     }
 
