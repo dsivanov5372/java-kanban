@@ -119,6 +119,7 @@ public class Manager {
 
     public void updateSubtask(Subtask subtask){
         subtasks.put(subtask.getId(), subtask);
+        (subtask.getParentEpic()).changeStatus(subtask);
     }
 
     public void deleteEpicById(int id){

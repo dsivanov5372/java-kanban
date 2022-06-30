@@ -38,7 +38,7 @@ public class Epic extends Task {
     }
 
     public void changeStatus(Subtask subtask){
-        if(subtask.status == Status.IN_PROGRESS && (status == Status.NEW || status == Status.DONE)){
+        if(subtask.status == Status.IN_PROGRESS && status != Status.IN_PROGRESS){
             status = Status.IN_PROGRESS;
         } else if (subtask.status == Status.DONE && status != Status.DONE){
             boolean isDone = true;
@@ -69,6 +69,8 @@ public class Epic extends Task {
         this.subtasks.remove(subtask);
         if(subtasks.isEmpty()){
             status = Status.NEW;
+        } else {
+            changeStatus(subtasks.get(0));
         }
     }
 
