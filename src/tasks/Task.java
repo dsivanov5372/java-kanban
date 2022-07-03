@@ -8,9 +8,10 @@ public class Task {
     protected int id;
     protected Status status;
 
-    public Task(String title, String details){
+    public Task(String title, String details, Status status){
         this.title = title;
         this.details = details;
+        this.status = status;
     }
 
     @Override

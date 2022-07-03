@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Subtask extends Task {
     private Epic parentEpic;
 
-    public Subtask(String title, String details, Epic parentEpic) {
-        super(title, details);
+    public Subtask(String title, String details, Status status, Epic parentEpic) {
+        super(title, details, status);
         this.parentEpic = parentEpic;
         parentEpic.addSubtask(this);
     }
@@ -34,7 +34,7 @@ public class Subtask extends Task {
     @Override
     public void setStatus(Status status){
         this.status = status;
-        parentEpic.changeStatus(this);
+        parentEpic.changeStatus();
     }
 
     public void setParentEpic(Epic epic){

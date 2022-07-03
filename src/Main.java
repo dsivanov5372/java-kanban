@@ -10,17 +10,20 @@ public class Main {
         manager.makeEpic(firstEpic);
         manager.makeEpic(secondEpic);
 
-        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц");
-        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники");
-        manager.makeTask(Status.IN_PROGRESS, firstTask);
-        manager.makeTask(Status.NEW, secondTask);
+        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS);
+        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники", Status.NEW);
+        manager.makeTask(firstTask);
+        manager.makeTask(secondTask);
 
-        Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники", firstEpic);
-        Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?", firstEpic);
-        Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать", secondEpic);
-        manager.makeSubtask(Status.IN_PROGRESS, firstSubtask);
-        manager.makeSubtask(Status.IN_PROGRESS, secondSubtask);
-        manager.makeSubtask(Status.DONE, thirdSubtask);
+        Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники",
+                                            Status.IN_PROGRESS, firstEpic);
+        Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
+                                            Status.IN_PROGRESS, firstEpic);
+        Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
+                                            Status.DONE, secondEpic);
+        manager.makeSubtask(firstSubtask);
+        manager.makeSubtask(secondSubtask);
+        manager.makeSubtask(thirdSubtask);
 
         System.out.println("Печать всех задач");
         System.out.println(manager.getAllTasks());

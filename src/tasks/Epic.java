@@ -6,7 +6,7 @@ public class Epic extends Task {
     ArrayList<Subtask> subtasks;
 
     public Epic(String title, String details) {
-        super(title, details);
+        super(title, details, Status.NEW);
     }
 
     @Override
@@ -34,46 +34,40 @@ public class Epic extends Task {
             subtasks = new ArrayList<>();
         }
         this.subtasks.add(subtask);
-        changeStatus(subtask);
+        changeStatus();
     }
 
-    public void changeStatus(Subtask subtask){
-        if(subtask.status == Status.IN_PROGRESS && status != Status.IN_PROGRESS){
-            status = Status.IN_PROGRESS;
-        } else if (subtask.status == Status.DONE && status != Status.DONE){
-            boolean isDone = true;
-            for (Subtask task : this.subtasks){
-                if(task.status != Status.DONE){
-                    isDone = false;
-                    break;
+    public void changeStatus(){
+        if (subtasks.isEmpty()){
+            status = Status.NEW;
+        } else {
+            int numOfDoneSubtasks = 0;
+            int numOfNewSubtasks = 0;
+            int numOfSubtasksInProgress = 0;
+
+            for (Subtask subtask : subtasks){
+                if (subtask.getStatus() == Status.NEW){
+                    numOfNewSubtasks++;
+                } else if (subtask.getStatus() == Status.IN_PROGRESS){
+                    numOfSubtasksInProgress++;
+                } else if (subtask.getStatus() == Status.DONE){
+                    numOfDoneSubtasks++;
                 }
             }
-            if(isDone){
-                status = Status.DONE;
-            }
-        } else if (subtask.status == Status.NEW && status != Status.NEW){
-            boolean isNew = true;
-            for (Subtask task : this.subtasks){
-                if(task.status != Status.NEW){
-                    isNew = false;
-                    break;
-                }
-            }
-            if(isNew){
+
+            if(numOfSubtasksInProgress > 0 || (numOfNewSubtasks > 0 && numOfDoneSubtasks > 0)) {
+                status = Status.IN_PROGRESS;
+            } else if (numOfNewSubtasks == subtasks.size()){
                 status = Status.NEW;
+            } else if (numOfDoneSubtasks == subtasks.size()){
+                status = Status.DONE;
             }
         }
     }
 
     public void removeSubtask(Subtask subtask){
         this.subtasks.remove(subtask);
-        if(subtasks.isEmpty()){
-            status = Status.NEW;
-        } else {
-            for (Subtask task : subtasks) {
-                changeStatus(task);
-            }
-        }
+        changeStatus();
     }
 
     public void removeAllSubtasks(){

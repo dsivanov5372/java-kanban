@@ -17,7 +17,6 @@ public class Manager {
 
     public void makeEpic(Epic epic){
         epic.setId(idSetter);
-        epic.setStatus(Status.NEW);
         idSetter++;
 
         if(epics == null){
@@ -26,8 +25,7 @@ public class Manager {
         epics.put(epic.getId(), epic);
     }
 
-    public void makeTask(Status status, Task task){
-        task.setStatus(status);
+    public void makeTask(Task task){
         task.setId(idSetter);
         idSetter++;
 
@@ -37,8 +35,7 @@ public class Manager {
         tasks.put(task.getId(), task);
     }
 
-    public void makeSubtask(Status status, Subtask subtask){
-        subtask.setStatus(status);
+    public void makeSubtask(Subtask subtask){
         subtask.setId(idSetter);
         idSetter++;
 
@@ -119,7 +116,7 @@ public class Manager {
 
     public void updateSubtask(Subtask subtask){
         subtasks.put(subtask.getId(), subtask);
-        (subtask.getParentEpic()).changeStatus(subtask);
+        (subtask.getParentEpic()).changeStatus();
     }
 
     public void deleteEpicById(int id){
