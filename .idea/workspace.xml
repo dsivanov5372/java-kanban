@@ -4,10 +4,8 @@
     <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Epic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Subtask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Subtask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/TaskManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -65,5 +64,16 @@
       <updated>1656159303518</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -1,9 +1,9 @@
-import managment.Manager;
+import managment.InMemoryTaskManager;
 import tasks.*;
 
 public class Main {
     public static void main(String[] args){
-        Manager manager = new Manager();
+        InMemoryTaskManager manager = new InMemoryTaskManager();
 
         Epic firstEpic = new Epic("Сдать летнюю сессию", "Заботать все предметы, чтобы не вылететь из вуза");
         Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
@@ -57,5 +57,6 @@ public class Main {
         System.out.println(manager.getAllTasks());
         System.out.println(manager.getAllEpics());
         System.out.println(manager.getAllSubtasks());
+
     }
 }
