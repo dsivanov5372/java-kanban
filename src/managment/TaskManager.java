@@ -5,7 +5,6 @@ import tasks.Subtask;
 import tasks.Task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public interface TaskManager {
     public void makeEpic(Epic epic);
@@ -30,11 +29,11 @@ public interface TaskManager {
 
     public void deleteAllSubtasksOfEpics(Epic epic);
 
-    public Epic getEpicById(int id);
+    public Epic getEpic(int id);
 
-    public Task getTaskById(int id);
+    public Task getTask(int id);
 
-    public Subtask getSubtaskById(int id);
+    public Subtask getSubtask(int id);
 
     public void updateEpics(Epic epic);
 
