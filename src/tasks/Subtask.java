@@ -3,12 +3,11 @@ package tasks;
 import java.util.Objects;
 
 public class Subtask extends Task {
-    private Epic parentEpic;
+    private int parentEpic;
 
     public Subtask(String title, String details, Status status, Epic parentEpic) {
         super(title, details, status);
-        this.parentEpic = parentEpic;
-        parentEpic.addSubtask(this);
+        this.parentEpic = parentEpic.getId();
     }
 
     @Override
@@ -28,19 +27,13 @@ public class Subtask extends Task {
 
     @Override
     public String toString(){
-        return "{" + super.toString() + "\nEpic id: " + parentEpic.getId() + "}";
-    }
-
-    @Override
-    public void setStatus(Status status){
-        this.status = status;
-        parentEpic.changeStatus();
+        return "{" + super.toString() + "\nEpic id: " + parentEpic + "}";
     }
 
     public void setParentEpic(Epic epic){
-        parentEpic = epic;
+        parentEpic = epic.getId();
     }
-    public Epic getParentEpic(){
+    public int getParentEpic(){
         return parentEpic;
     }
 }

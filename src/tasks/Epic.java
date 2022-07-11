@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Epic extends Task {
-    ArrayList<Subtask> subtasks;
-
+    ArrayList<Integer> subtasksId;
+    
     public Epic(String title, String details) {
         super(title, details, Status.NEW);
     }
@@ -26,19 +26,19 @@ public class Epic extends Task {
 
     @Override
     public String toString(){
-        return "{" + super.toString() + "\nSubtasks list: " + subtasks.toString() + "}";
+        return "{" + super.toString() + "\nSubtasks id list: " + subtasksId.toString() + "}";
     }
 
-    public void addSubtask(Subtask subtask){
-        if(subtasks == null){
-            subtasks = new ArrayList<>();
+    public void addSubtask(Subtask subtask, ArrayList<Subtask> subtasks){
+        if(subtasksId == null){
+            subtasksId = new ArrayList<>();
         }
-        this.subtasks.add(subtask);
-        changeStatus();
+        this.subtasksId.add(subtask.getId());
+        changeStatus(subtasks);
     }
 
-    public void changeStatus(){
-        if (subtasks.isEmpty()){
+    public void changeStatus(ArrayList<Subtask> subtasks){
+        if (subtasksId.isEmpty() || subtasks == null){
             status = Status.NEW;
         } else {
             int numOfDoneSubtasks = 0;
@@ -57,7 +57,7 @@ public class Epic extends Task {
 
             if(numOfSubtasksInProgress > 0 || (numOfNewSubtasks > 0 && numOfDoneSubtasks > 0)) {
                 status = Status.IN_PROGRESS;
-            } else if (numOfNewSubtasks == subtasks.size()){
+            } else if (numOfNewSubtasks == subtasksId.size()){
                 status = Status.NEW;
             } else {
                 status = Status.DONE;
@@ -65,17 +65,21 @@ public class Epic extends Task {
         }
     }
 
-    public void removeSubtask(Subtask subtask){
-        this.subtasks.remove(subtask);
-        changeStatus();
+    public void removeSubtask(Subtask subtask, ArrayList<Subtask> subtasks){
+        this.subtasksId.remove(subtasksId.indexOf(subtask.getId()));
+        subtasks.remove(subtask);
+        changeStatus(subtasks);
     }
 
     public void removeAllSubtasks(){
-        subtasks.clear();
-        status = Status.NEW;
+        subtasksId.clear();
+        changeStatus(null);
     }
 
-    public ArrayList<Subtask> getSubtasks(){
-        return subtasks;
+    public ArrayList<Integer> getSubtasksId(){
+        if(subtasksId == null){
+            subtasksId = new ArrayList<>();
+        }
+        return subtasksId;
     }
 }
