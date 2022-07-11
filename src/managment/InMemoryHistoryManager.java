@@ -16,7 +16,7 @@ public class InMemoryHistoryManager implements HistoryManager{
         if(queue == null){
             queue = new LinkedList<>();
         } else if (queue.size() == 10){
-            queue.remove(0);
+            queue.removeFirst();
         }
         queue.add(task);
     }
