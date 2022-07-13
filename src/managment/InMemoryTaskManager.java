@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    private InMemoryHistoryManager historyManager = (InMemoryHistoryManager)Managers.getDefaultHistory();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
     private HashMap<Integer, Task> tasks;
     private HashMap<Integer, Epic> epics;
     private HashMap<Integer, Subtask> subtasks;
@@ -107,27 +107,18 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpic(int id){
-        if(historyManager == null){
-            historyManager = (InMemoryHistoryManager)Managers.getDefaultHistory();
-        }
         historyManager.add(epics.get(id));
         return epics.get(id);
     }
 
     @Override
     public Task getTask(int id){
-        if(historyManager == null){
-            historyManager = (InMemoryHistoryManager)Managers.getDefaultHistory();
-        }
         historyManager.add(tasks.get(id));
         return tasks.get(id);
     }
 
     @Override
     public Subtask getSubtask(int id){
-        if(historyManager == null){
-            historyManager = (InMemoryHistoryManager)Managers.getDefaultHistory();
-        }
         historyManager.add(subtasks.get(id));
         return subtasks.get(id);
     }
