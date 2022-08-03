@@ -26,6 +26,9 @@ public class Epic extends Task {
 
     @Override
     public String toString(){
+        if(subtasksId == null){
+            subtasksId = new ArrayList<>();
+        }
         return "{" + super.toString() + "\nSubtasks id list: " + subtasksId.toString() + "}";
     }
 

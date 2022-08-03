@@ -20,7 +20,7 @@ public class Main {
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
                                             Status.IN_PROGRESS, firstEpic);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
-                                            Status.DONE, secondEpic);
+                                            Status.DONE, firstEpic);
         manager.makeSubtask(firstSubtask);
         manager.makeSubtask(secondSubtask);
         manager.makeSubtask(thirdSubtask);
@@ -41,29 +41,29 @@ public class Main {
         manager.updateSubtask(thirdSubtask);
         System.out.println(secondEpic);
 
-        System.out.println("Удалим подзадачу у эпика");
-        manager.deleteSubtaskById(secondSubtask.getId());
-        System.out.println(firstEpic);
-
-        System.out.println("Удалим задачу и один эпик");
-        manager.deleteEpicById(secondEpic.getId());
-        manager.deleteTaskById(secondTask.getId());
-        System.out.println(manager.getAllEpics());
-        System.out.println(manager.getAllTasks());
-
         System.out.println("печать истории");
         System.out.println(manager.getHistory());
-        System.out.println("Сделаем три запроса get и посмотрим содержимое истории");
-        manager.getEpic(firstEpic.getId());
+        System.out.println("сделаем различные запросы задач");
+        manager.getTask(secondTask.getId());
+        manager.getSubtask(secondSubtask.getId());
+        manager.getEpic(secondEpic.getId());
         manager.getTask(firstTask.getId());
         manager.getSubtask(firstSubtask.getId());
-        System.out.println(manager.getHistory());
-        System.out.println("Сделаем ещё 8 таких запросов и проверим размер истории + её содержимое");
-        for (int i = 0; i < 8; i++){
-            manager.getEpic(firstEpic.getId());
-        }
-        System.out.println(manager.getHistory().size());
-        System.out.println(manager.getHistory());
+        manager.getEpic(firstEpic.getId());
+        manager.getSubtask(thirdSubtask.getId());
+        System.out.println(manager.getHistory().size() + "\n" + manager.getHistory());
+
+        System.out.println("Cделаем повторный вызов");
+        manager.getTask(firstTask.getId());
+        System.out.println(manager.getHistory().size() + "\n" + manager.getHistory());
+
+        System.out.println("удалим эпик с подзадачами");
+        manager.deleteEpicById(firstEpic.getId());
+        System.out.println(manager.getHistory().size() + "\n" + manager.getHistory());
+
+        System.out.println("удалим задачу");
+        manager.deleteTaskById(secondTask.getId());
+        System.out.println(manager.getHistory().size() + "\n" + manager.getHistory());
 
         System.out.println("Удалим всё");
         manager.deleteAllTasks();
@@ -71,5 +71,6 @@ public class Main {
         System.out.println(manager.getAllTasks());
         System.out.println(manager.getAllEpics());
         System.out.println(manager.getAllSubtasks());
+        System.out.println(manager.getHistory());
     }
 }
