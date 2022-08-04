@@ -8,12 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager{
-    private class CustomLinkedList{
-        private final HashMap<Integer, Node> table = new HashMap<Integer, Node>();
+    private static class CustomLinkedList{
+        private final HashMap<Integer, Node> table = new HashMap<>();
         private Node head;
         private Node tail;
 
-        public void linkLast(Task task){
+        private void linkLast(Task task){
             Node element = new Node();
             element.setTask(task);
 
@@ -22,7 +22,8 @@ public class InMemoryHistoryManager implements HistoryManager{
             }
 
             if (head == null){
-                tail = head = element;
+                tail = element;
+                head = element;
                 element.setNext(null);
                 element.setPrev(null);
             } else {
@@ -32,14 +33,10 @@ public class InMemoryHistoryManager implements HistoryManager{
                 tail = element;
             }
 
-            if (table.size() == 10){
-                removeNode(head);
-            }
-
             table.put(task.getId(), element);
         }
 
-        public ArrayList<Task> getTasks(){
+        private ArrayList<Task> getTasks(){
             ArrayList<Task> result = new ArrayList<>();
             for (Node element = head; element != null; element = element.getNext()){
                 result.add(element.getTask());
@@ -47,7 +44,7 @@ public class InMemoryHistoryManager implements HistoryManager{
             return result;
         }
 
-        public void removeNode(Node node){
+        private void removeNode(Node node){
             if (node != null) {
                 table.remove(node.getTask().getId());
                 Node prev = node.getPrev();
@@ -70,8 +67,8 @@ public class InMemoryHistoryManager implements HistoryManager{
             }
         }
 
-        public Node getNode(int id){
-            return table.getOrDefault(id, null);
+        private Node getNode(int id){
+            return table.get(id);
         }
     }
 
