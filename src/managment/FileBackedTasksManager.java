@@ -175,13 +175,13 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         FileBackedTasksManager manager = new FileBackedTasksManager();
         Epic firstEpic = new Epic("Сдать летнюю сессию", "Заботать все предметы чтобы не вылететь из вуза");
         Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
-        manager.addEpic(firstEpic);
-        manager.addEpic(secondEpic);
+        manager.makeEpic(firstEpic);
+        manager.makeEpic(secondEpic);
 
         Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS);
         Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        manager.addTask(firstTask);
-        manager.addTask(secondTask);
+        manager.makeTask(firstTask);
+        manager.makeTask(secondTask);
 
         Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы квадрики и коники",
                 Status.IN_PROGRESS, firstEpic);
@@ -189,9 +189,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
                 Status.IN_PROGRESS, firstEpic);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять как долго смогу поголодать",
                 Status.DONE, firstEpic);
-        manager.addSubtask(firstSubtask);
-        manager.addSubtask(secondSubtask);
-        manager.addSubtask(thirdSubtask);
+        manager.makeSubtask(firstSubtask);
+        manager.makeSubtask(secondSubtask);
+        manager.makeSubtask(thirdSubtask);
         System.out.println(manager.getHistory());
 
         System.out.println("Проверим что правильно считываем из файла");
