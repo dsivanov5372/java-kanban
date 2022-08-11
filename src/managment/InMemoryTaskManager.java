@@ -195,4 +195,8 @@ public class InMemoryTaskManager implements TaskManager {
     protected void addTask(Task task){
         tasks.put(task.getId(), task);
     }
+
+    protected Epic findById(int id){
+        return epics.get(id);
+    }
 }
