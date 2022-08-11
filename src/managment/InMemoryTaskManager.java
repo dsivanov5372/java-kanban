@@ -8,22 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    private final HistoryManager historyManager = Managers.getDefaultHistory();
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, Subtask> subtasks;
+    private final HistoryManager historyManager;
+    private final HashMap<Integer, Task> tasks;
+    private final HashMap<Integer, Epic> epics;
+    private final HashMap<Integer, Subtask> subtasks;
     private int idSetter = 1;
 
-    public InMemoryTaskManager(){}
-
+    public InMemoryTaskManager(){
+        tasks = new HashMap<>();
+        epics = new HashMap<>();
+        subtasks = new HashMap<>();
+        historyManager = Managers.getDefaultHistory();
+    }
     @Override
     public void makeEpic(Epic epic){
         epic.setId(idSetter);
         idSetter++;
-
-        if(epics == null){
-            epics = new HashMap<>();
-        }
         epics.put(epic.getId(), epic);
     }
 
@@ -31,10 +31,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void makeTask(Task task){
         task.setId(idSetter);
         idSetter++;
-
-        if(tasks == null){
-            tasks = new HashMap<>();
-        }
         tasks.put(task.getId(), task);
     }
 
@@ -42,10 +38,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void makeSubtask(Subtask subtask){
         subtask.setId(idSetter);
         idSetter++;
-
-        if(subtasks == null){
-            subtasks = new HashMap<>();
-        }
         subtasks.put(subtask.getId(), subtask);
         epics.get(subtask.getParentEpic()).addSubtask(subtask, getAllSubtaskOfEpic(subtask.getParentEpic()));
     }
@@ -180,5 +172,27 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public List<Task> getHistory(){
         return historyManager.getHistory();
+    }
+
+    protected void addToHistory(int id){
+        if (epics.containsKey(id)){
+            historyManager.add(epics.get(id));
+        } else if (subtasks.containsKey(id)){
+            historyManager.add(subtasks.get(id));
+        } else {
+            historyManager.add(tasks.get(id));
+        }
+    }
+
+    protected void addEpic(Epic epic){
+        epics.put(epic.getId(), epic);
+    }
+
+    protected void addSubtask(Subtask subtask){
+        subtasks.put(subtask.getId(), subtask);
+    }
+
+    protected void addTask(Task task){
+        tasks.put(task.getId(), task);
     }
 }
