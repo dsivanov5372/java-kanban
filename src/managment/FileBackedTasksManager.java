@@ -144,9 +144,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
             FileTaskReader.readFile(file, manager);
         } catch (IOException exception) {
             System.out.println("Не удалось считать данные из файла");
-        } finally {
-            return manager;
         }
+        return manager;
     }
 
     public static String historyToString(HistoryManager manager){
@@ -171,18 +170,40 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         return toReturn;
     }
 
-    static void main(String[] args){
+    public static void main(String[] args){
         FileBackedTasksManager manager = new FileBackedTasksManager();
         Epic firstEpic = new Epic("Сдать летнюю сессию", "Заботать все предметы чтобы не вылететь из вуза");
         Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
         manager.makeEpic(firstEpic);
         manager.makeEpic(secondEpic);
-
         Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS);
         Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask2 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask3 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask4 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask5 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask6 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask7 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask8 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask9 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask10 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask11 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask12 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task secondTask13 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
         manager.makeTask(firstTask);
         manager.makeTask(secondTask);
-
+        manager.makeTask(secondTask2);
+        manager.makeTask(secondTask3);
+        manager.makeTask(secondTask4);
+        manager.makeTask(secondTask5);
+        manager.makeTask(secondTask6);
+        manager.makeTask(secondTask7);
+        manager.makeTask(secondTask8);
+        manager.makeTask(secondTask9);
+        manager.makeTask(secondTask10);
+        manager.makeTask(secondTask11);
+        manager.makeTask(secondTask12);
+        manager.makeTask(secondTask13);
         Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы квадрики и коники",
                 Status.IN_PROGRESS, firstEpic);
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
@@ -193,7 +214,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         manager.makeSubtask(secondSubtask);
         manager.makeSubtask(thirdSubtask);
         System.out.println(manager.getHistory());
-
         System.out.println("Проверим что правильно считываем из файла");
         String path = System.getProperty("user.home");
         Path of = Path.of(path, "backup.csv");
@@ -205,6 +225,25 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         System.out.println("Подзадачи");
         System.out.println(newManager.getAllSubtasks());
         System.out.println("История");
+        System.out.println(List.of(secondTask2.getId(),secondTask4.getId(),secondTask3.getId(),secondTask5.getId(),secondTask6.getId(),secondTask7.getId()));
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask2.getId());
+        manager.getTask(secondTask4.getId());
+        manager.getTask(secondTask3.getId());
+        manager.getTask(secondTask5.getId());
+        manager.getTask(secondTask6.getId());
+        manager.getTask(secondTask7.getId());
         System.out.println(newManager.getHistory());
+        System.out.println("правильная история :)");
+        System.out.println(manager.getHistory());
     }
 }

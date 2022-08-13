@@ -14,49 +14,52 @@ import java.util.List;
 public class FileTaskReader {
     public static void readFile(File file, FileBackedTasksManager manager) throws IOException {
         FileReader reader = new FileReader(file, StandardCharsets.UTF_8);
-        BufferedReader bf = new BufferedReader(reader);
+        BufferedReader bufferedReader = new BufferedReader(reader);
 
-        String line = bf.readLine();
+        String line = bufferedReader.readLine();
 
-        while (bf.ready()){
-            line = bf.readLine();
+        while (bufferedReader.ready()){
+            line = bufferedReader.readLine();
             if (line.equals("")){
                 break;
             }
 
             Task task = manager.fromString(line);
-            if (task instanceof Epic){
-                manager.addEpic((Epic) task);
-            } else if (task instanceof Subtask){
-                manager.addSubtask((Subtask) task);
+            if (task instanceof Epic epic){
+                manager.addEpic(epic);
+            } else if (task instanceof Subtask subtask){
+                manager.addSubtask(subtask);
             } else {
                 manager.addTask(task);
             }
         }
 
-        String lineWithHistory = bf.readLine();
+        String lineWithHistory = bufferedReader.readLine();
+        bufferedReader.close();
+
         for (int id : FileBackedTasksManager.historyFromString(lineWithHistory)){
             manager.addToHistory(id);
         }
+
     }
 
     public static void save(FileBackedTasksManager manager){
         ArrayList<Task> tasks = manager.getAllTasks();
         ArrayList<Epic> epics = manager.getAllEpics();
         String path = System.getProperty("user.home");
-        Path of = Path.of(path, "backup.csv");
+        Path fileToSaveData = Path.of(path, "backup.csv");
         //dir: /Users/dmitry
 
         try {
-            if (Files.exists(of)){
-                Files.delete(of);
+            if (Files.exists(fileToSaveData)){
+                Files.delete(fileToSaveData);
             }
-            Files.createFile(of);
+            Files.createFile(fileToSaveData);
         } catch (IOException e) {
             System.out.println("Не удалось найти файл для записи данных");
         }
 
-        try (FileWriter writer = new FileWriter(new File(String.valueOf(of)), StandardCharsets.UTF_8)){
+        try (FileWriter writer = new FileWriter(String.valueOf(fileToSaveData), StandardCharsets.UTF_8)){
             String params = "id,type,name,status,description,epic\n";
             writer.write(params);
 
@@ -89,7 +92,6 @@ public class FileTaskReader {
             writer.write(str.toString());
         } catch (IOException exception){
             System.out.println("Не удалось записать данные в файл");
-            return;
         }
     }
 }

@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/FileTaskReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileTaskReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryHistoryManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

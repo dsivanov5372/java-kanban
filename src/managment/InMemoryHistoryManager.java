@@ -4,7 +4,6 @@ import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager{
@@ -73,7 +72,6 @@ public class InMemoryHistoryManager implements HistoryManager{
     }
 
     private final CustomLinkedList list = new CustomLinkedList();
-    public InMemoryHistoryManager(){}
 
     @Override
     public void add(Task task) {

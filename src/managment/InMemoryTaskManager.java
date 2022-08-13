@@ -39,7 +39,8 @@ public class InMemoryTaskManager implements TaskManager {
         subtask.setId(idSetter);
         idSetter++;
         subtasks.put(subtask.getId(), subtask);
-        epics.get(subtask.getParentEpic()).addSubtask(subtask, getAllSubtaskOfEpic(subtask.getParentEpic()));
+        Epic parentEpic = epics.get(subtask.getParentEpic());
+        parentEpic.addSubtask(subtask, getAllSubtaskOfEpic(parentEpic.getId()));
     }
 
     @Override
@@ -87,7 +88,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteAllSubtasks(){
         for (Subtask subtask : subtasks.values()){
-            epics.get(subtask.getParentEpic()).removeSubtask(subtask, getAllSubtaskOfEpic(subtask.getParentEpic()));
+            Epic parentEpic = epics.get(subtask.getParentEpic());
+            parentEpic.removeSubtask(subtask, getAllSubtaskOfEpic(parentEpic.getId()));
         }
         subtasks.clear();
     }
@@ -142,7 +144,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateSubtask(Subtask subtask){
         subtasks.put(subtask.getId(), subtask);
-        epics.get(subtask.getParentEpic()).changeStatus(getAllSubtaskOfEpic(subtask.getParentEpic()));
+        Epic parentEpic = epics.get(subtask.getParentEpic());
+        parentEpic.changeStatus(getAllSubtaskOfEpic(parentEpic.getId()));
     }
 
     @Override
@@ -164,9 +167,14 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteSubtaskById(int id){
-        (epics.get(subtasks.get(id).getParentEpic())).removeSubtask(subtasks.get(id), getAllSubtaskOfEpic(subtasks.get(id).getParentEpic()));
-        subtasks.remove(id);
-        historyManager.remove(id);
+        Subtask subtask = subtasks.get(id);
+
+        if (subtask != null) {
+            Epic parentEpic = epics.get(subtask.getParentEpic());
+            parentEpic.removeSubtask(subtask, getAllSubtaskOfEpic(parentEpic.getId()));
+            subtasks.remove(id);
+            historyManager.remove(id);
+        }
     }
 
     @Override
