@@ -148,16 +148,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         return manager;
     }
 
-    public static String historyToString(HistoryManager manager){
-        StringBuilder str = new StringBuilder();
-
-        for (Task task : manager.getHistory()){
-            str.append(task.getId()).append(",");
-        }
-        str.deleteCharAt(str.length() - 1);
-
-        return str.toString();
-    }
 
     static List<Integer> historyFromString(String value){
         String[] id = value.split(",");

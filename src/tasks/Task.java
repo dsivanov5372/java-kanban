@@ -31,17 +31,8 @@ public class Task {
 
     @Override
     public String toString(){
-        return "{title: " + title + "\ndetails: " + details.toString() + "\n"
-                + "id: " + id + "\nstatus: " + getStringStatus() + "}";
-    }
-
-    public String getStringStatus(){
-        if (status == Status.NEW){
-            return "NEW";
-        } else if (status == Status.IN_PROGRESS){
-            return "IN_PROGRESS";
-        }
-        return "DONE";
+        return "{title: " + title + "\ndetails: " + details + "\n"
+                + "id: " + id + "\nstatus: " + status + "}";
     }
 
     public void setTitle(String title){
