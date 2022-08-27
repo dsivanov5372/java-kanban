@@ -87,4 +87,17 @@ public class InMemoryHistoryManager implements HistoryManager{
     public void remove(int id){
         list.removeNode(list.getNode(id));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        InMemoryHistoryManager manager = (InMemoryHistoryManager)obj;
+        return this.getHistory().equals(manager.getHistory());
+    }
 }

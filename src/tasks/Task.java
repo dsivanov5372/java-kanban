@@ -1,11 +1,15 @@
 package tasks;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
+    protected Duration duration;
+    protected LocalDateTime startTime;
     protected String title;
     protected String details;
-    protected int id;
+    protected int id = 0;
     protected Status status;
 
     public Task(String title, String details, Status status){
@@ -14,6 +18,13 @@ public class Task {
         this.status = status;
     }
 
+    public Task(String title, String details, Status status, Duration duration, LocalDateTime startTime){
+        this.title = title;
+        this.details = details;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
     @Override
     public boolean equals(Object obj){
         if (this == obj) return true;
@@ -21,7 +32,8 @@ public class Task {
         if (this.getClass() != obj.getClass()) return false;
         Task task = (Task)obj;
         return Objects.equals(title, task.title) && Objects.equals(details, task.details)
-                && Objects.equals(id, task.id) && Objects.equals(status, task.status);
+                && Objects.equals(id, task.id) && Objects.equals(status, task.status) &&
+                Objects.equals(duration, task.duration) && Objects.equals(startTime, task.startTime);
     }
 
     @Override
@@ -32,7 +44,15 @@ public class Task {
     @Override
     public String toString(){
         return "{title: " + title + "\ndetails: " + details + "\n"
-                + "id: " + id + "\nstatus: " + status + "}";
+                + "id: " + id + "\nstatus: " + status +
+                "\nstart: " + startTime +"\nend:" + getEndTime() +"}";
+    }
+
+    public LocalDateTime getEndTime(){
+        if (startTime != null && duration != null) {
+            return startTime.plus(duration);
+        }
+        return null;
     }
 
     public void setTitle(String title){
@@ -51,6 +71,14 @@ public class Task {
         this.status = status;
     }
 
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public void setStartTime(LocalDateTime startTime){
+        this.startTime = startTime;
+    }
+
     public String getTitle(){
         return title;
     }
@@ -65,5 +93,13 @@ public class Task {
 
     public Status getStatus(){
         return status;
+    }
+
+    public Duration getDuration(){
+        return duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 }

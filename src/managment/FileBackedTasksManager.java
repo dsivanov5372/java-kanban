@@ -5,8 +5,11 @@ import tasks.Status;
 import tasks.Subtask;
 import tasks.Task;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +61,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
     }
 
     @Override
-    public void updateEpics(Epic epic){
-        super.updateEpics(epic);
+    public void updateEpic(Epic epic){
+        super.updateEpic(epic);
         FileTaskReader.save(this);
     }
 
@@ -93,6 +96,22 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         FileTaskReader.save(this);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        FileBackedTasksManager manager = (FileBackedTasksManager) obj;
+        return this.tasks.equals(manager.tasks) &&
+                this.epics.equals(manager.epics) &&
+                this.subtasks.equals(manager.subtasks) &&
+                this.historyManager.equals(manager.historyManager);
+    }
+
     private String getParentEpicId(Task task){
         if (task instanceof Subtask){
             return Integer.toString(((Subtask)task).getParentEpic());
@@ -111,28 +130,48 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
 
     String toString(Task task){
         String[] toJoin = {Integer.toString(task.getId()), getType(task).toString(), task.getTitle(),
-                            task.getStatus().toString(), task.getDetails(), getParentEpicId(task)};
+                            task.getStatus().toString(), task.getDetails(), getParentEpicId(task),
+                            String.valueOf(task.getDuration()), String.valueOf(task.getStartTime())};
         return String.join(",", toJoin);
     }
 
     Task fromString(String value){
         String[] params = value.split(",");
 
+        Duration duration;
+        if (params[6].equals("null")){
+            duration = null;
+        } else {
+            duration = Duration.parse(params[6]);
+        }
+
+        LocalDateTime start;
+        if (params[7].equals("null")){
+            start = null;
+        } else {
+            start = LocalDateTime.parse(params[7]);
+        }
         //как сказано в условии, рассчитано на идеальные условия,
         //что файл не трогали и он в нужном формате, что задачи идут в нужном порядке;
         if (params[1].equals("EPIC")){
             Epic epic = new Epic(params[2], params[4]);
             epic.setId(Integer.parseInt(params[0]));
             epic.setStatus(Status.valueOf(params[3]));
+            epic.setDuration(duration);
+            epic.setStartTime(start);
             return epic;
         } else if (params[1].equals("SUBTASK")){
             Subtask subtask = new Subtask(params[2], params[4], Status.valueOf(params[3]),
                                             super.findById(Integer.parseInt(params[5])));
             subtask.setId(Integer.parseInt(params[0]));
+            subtask.setDuration(duration);
+            subtask.setStartTime(start);
             return subtask;
         } else {
             Task task = new Task(params[2], params[4], Status.valueOf(params[3]));
             task.setId(Integer.parseInt(params[0]));
+            task.setDuration(duration);
+            task.setStartTime(start);
             return task;
         }
     }
@@ -150,13 +189,16 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
 
 
     static List<Integer> historyFromString(String value){
-        String[] id = value.split(",");
         ArrayList<Integer> toReturn = new ArrayList<>();
+        if (value != null) {
+            String[] id = value.split(",");
 
-        for (String number : id){
-            toReturn.add(Integer.parseInt(number));
+            for (String number : id) {
+                toReturn.add(Integer.parseInt(number));
+            }
+
+            return toReturn;
         }
-
         return toReturn;
     }
 
@@ -195,7 +237,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         manager.makeTask(secondTask12);
         manager.makeTask(secondTask13);
         Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы квадрики и коники",
-                Status.IN_PROGRESS, firstEpic);
+                Status.IN_PROGRESS, firstEpic, Duration.ofMinutes(30), LocalDateTime.of(2003, 1, 28, 9, 30));
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
                 Status.IN_PROGRESS, firstEpic);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять как долго смогу поголодать",

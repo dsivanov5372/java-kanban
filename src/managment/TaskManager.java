@@ -36,7 +36,7 @@ public interface TaskManager {
 
     Subtask getSubtask(int id);
 
-    void updateEpics(Epic epic);
+    void updateEpic(Epic epic);
 
     void updateTask(Task task);
 
@@ -49,4 +49,6 @@ public interface TaskManager {
     void deleteSubtaskById(int id);
 
     List<Task> getHistory();
+
+
 }
