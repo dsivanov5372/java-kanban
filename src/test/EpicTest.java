@@ -1,9 +1,13 @@
-package tasks;
+package test;
 
 import managment.InMemoryTaskManager;
 import managment.TaskManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tasks.Epic;
+import tasks.Status;
+import tasks.Subtask;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -23,7 +27,7 @@ class EpicTest {
 
     @Test
     public void statusShouldBeNewIfNoSubtasks(){
-        assertEquals(Status.NEW, epic.getStatus());
+        Assertions.assertEquals(Status.NEW, epic.getStatus());
     }
 
     @Test

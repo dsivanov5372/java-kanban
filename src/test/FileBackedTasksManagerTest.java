@@ -1,5 +1,7 @@
-package managment;
+package test;
 
+import managment.FileBackedTasksManager;
+import managment.FileTaskReader;
 import org.junit.jupiter.api.Test;
 import tasks.Epic;
 import tasks.Status;
@@ -14,10 +16,9 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>{
+class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager> {
 
-    private final String path = System.getProperty("user.home");
-    private final Path fileToSaveData = Path.of(path, "backup.csv");
+    private final Path fileToSaveData = Path.of("backup.csv");
     private final File fileToLoadFrom = new File(String.valueOf(fileToSaveData));
 
     public FileBackedTasksManagerTest() {
@@ -28,10 +29,14 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
     public void managerShouldBeEmptyAfterLoadingFromEmptyFile(){
         FileTaskReader.save(manager);
         FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile(fileToLoadFrom);
-        assertEquals(manager, newManager);
-        assertTrue(newManager.epics.isEmpty());
-        assertTrue(newManager.tasks.isEmpty());
-        assertTrue(newManager.subtasks.isEmpty());
+        assertEquals(manager.getAllEpics(), newManager.getAllEpics());
+        assertEquals(manager.getAllTasks(), newManager.getAllTasks());
+        assertEquals(manager.getAllSubtasks(), newManager.getAllSubtasks());
+        assertEquals(manager.getHistory(), newManager.getHistory());
+        assertEquals(manager.getPrioritizedTasks(), newManager.getPrioritizedTasks());
+        assertTrue(newManager.getAllEpics().isEmpty());
+        assertTrue(newManager.getAllTasks().isEmpty());
+        assertTrue(newManager.getAllSubtasks().isEmpty());
         assertTrue(newManager.getHistory().isEmpty());
     }
 
@@ -41,7 +46,11 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
         manager.makeEpic(epic1);
         FileTaskReader.save(manager);
         FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile(fileToLoadFrom);
-        assertEquals(manager, newManager);
+        assertEquals(manager.getAllEpics(), newManager.getAllEpics());
+        assertEquals(manager.getAllTasks(), newManager.getAllTasks());
+        assertEquals(manager.getAllSubtasks(), newManager.getAllSubtasks());
+        assertEquals(manager.getHistory(), newManager.getHistory());
+        assertEquals(manager.getPrioritizedTasks(), newManager.getPrioritizedTasks());
         assertTrue(newManager.getAllEpics().contains(epic1));
         assertEquals(1, newManager.getAllEpics().size());
         assertTrue(newManager.getAllSubtasks().isEmpty());

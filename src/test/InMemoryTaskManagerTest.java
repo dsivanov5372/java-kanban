@@ -1,5 +1,6 @@
-package managment;
+package test;
 
+import managment.InMemoryTaskManager;
 import org.junit.jupiter.api.Test;
 import tasks.Epic;
 import tasks.Status;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager>{
+public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     public InMemoryTaskManagerTest() {
         super(new InMemoryTaskManager());
     }

@@ -12,43 +12,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileTaskReader {
-    public static void readFile(File file, FileBackedTasksManager manager) throws IOException {
-        FileReader reader = new FileReader(file, StandardCharsets.UTF_8);
-        BufferedReader bufferedReader = new BufferedReader(reader);
+    public static void readFile(File file, FileBackedTasksManager manager) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
 
-        String line = bufferedReader.readLine();
+            String line = bufferedReader.readLine();
+            while (bufferedReader.ready()) {
+                line = bufferedReader.readLine();
+                if (line.equals("")) {
+                    break;
+                }
 
-        while (bufferedReader.ready()){
-            line = bufferedReader.readLine();
-            if (line.equals("")){
-                break;
+                Task task = manager.fromString(line);
+                if (task instanceof Epic epic) {
+                    manager.addEpic(epic);
+                } else if (task instanceof Subtask subtask) {
+                    manager.addSubtask(subtask);
+                } else {
+                    manager.addTask(task);
+                }
             }
 
-            Task task = manager.fromString(line);
-            if (task instanceof Epic epic){
-                manager.addEpic(epic);
-            } else if (task instanceof Subtask subtask){
-                manager.addSubtask(subtask);
-            } else {
-                manager.addTask(task);
+            String lineWithHistory = bufferedReader.readLine();
+            for (int id : FileBackedTasksManager.historyFromString(lineWithHistory)){
+                manager.addToHistory(id);
             }
+        } catch (IOException e) {
+            System.out.println("Не удалось считать данные из файла.");
         }
-
-        String lineWithHistory = bufferedReader.readLine();
-        bufferedReader.close();
-
-        for (int id : FileBackedTasksManager.historyFromString(lineWithHistory)){
-            manager.addToHistory(id);
-        }
-
     }
 
     public static void save(FileBackedTasksManager manager){
         ArrayList<Task> tasks = manager.getAllTasks();
         ArrayList<Epic> epics = manager.getAllEpics();
-        String path = System.getProperty("user.home");
-        Path fileToSaveData = Path.of(path, "backup.csv");
-        //dir: /Users/dmitry
+        Path fileToSaveData = Path.of("backup.csv");
 
         try {
             if (Files.exists(fileToSaveData)){

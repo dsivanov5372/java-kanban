@@ -28,9 +28,7 @@ public class Subtask extends Task {
         if (obj == null) return false;
         if (this.getClass() != obj.getClass()) return false;
         Subtask subtask = (Subtask)obj;
-        return Objects.equals(title, subtask.title) && Objects.equals(details, subtask.details)
-                && Objects.equals(id, subtask.id) && Objects.equals(status, subtask.status) &&
-                Objects.equals(duration, subtask.duration) && Objects.equals(startTime, subtask.startTime);
+        return Objects.equals(id, subtask.id);
     }
 
     @Override

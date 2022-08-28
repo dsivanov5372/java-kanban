@@ -212,9 +212,10 @@ public class InMemoryTaskManager implements TaskManager {
             epics.remove(id);
             historyManager.remove(id);
             for (int subtask : epic.getSubtasksId()) {
+                Subtask task = subtasks.get(subtask);
                 subtasks.remove(subtask);
                 historyManager.remove(subtask);
-                prioritizedTasksSet.remove(subtasks.get(subtask));
+                prioritizedTasksSet.remove(task);
             }
         }
     }
@@ -246,11 +247,12 @@ public class InMemoryTaskManager implements TaskManager {
         return historyManager.getHistory();
     }
 
+    @Override
     public ArrayList<Task> getPrioritizedTasks(){
         return new ArrayList<>(prioritizedTasksSet);
     }
 
-    protected void addToHistory(int id){
+    public void addToHistory(int id){
         if (epics.containsKey(id)){
             historyManager.add(epics.get(id));
         } else if (subtasks.containsKey(id)){
@@ -260,13 +262,13 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    protected void addEpic(Epic epic){
+    public void addEpic(Epic epic){
         if (epic != null && findIntersect(epic)) {
             epics.put(epic.getId(), epic);
         }
     }
 
-    protected void addSubtask(Subtask subtask){
+    public void addSubtask(Subtask subtask){
         if (subtask != null && subtask.getParentEpic() != -1 &&
                 epics.containsKey(subtask.getParentEpic()) && findIntersect(subtask)) {
 
@@ -275,14 +277,14 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    protected void addTask(Task task){
+    public void addTask(Task task){
         if (task != null && findIntersect(task)) {
             tasks.put(task.getId(), task);
             prioritizedTasksSet.add(task);
         }
     }
 
-    protected Epic findById(int id){
+    public Epic findById(int id){
         return epics.get(id);
     }
 

@@ -96,22 +96,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         FileTaskReader.save(this);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        FileBackedTasksManager manager = (FileBackedTasksManager) obj;
-        return this.tasks.equals(manager.tasks) &&
-                this.epics.equals(manager.epics) &&
-                this.subtasks.equals(manager.subtasks) &&
-                this.historyManager.equals(manager.historyManager);
-    }
-
     private String getParentEpicId(Task task){
         if (task instanceof Subtask){
             return Integer.toString(((Subtask)task).getParentEpic());
@@ -178,12 +162,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
 
     public static FileBackedTasksManager loadFromFile(File file){
         FileBackedTasksManager manager = new FileBackedTasksManager();
-
-        try {
-            FileTaskReader.readFile(file, manager);
-        } catch (IOException exception) {
-            System.out.println("Не удалось считать данные из файла");
-        }
+        FileTaskReader.readFile(file, manager);
         return manager;
     }
 
@@ -247,8 +226,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         manager.makeSubtask(thirdSubtask);
         System.out.println(manager.getHistory());
         System.out.println("Проверим что правильно считываем из файла");
-        String path = System.getProperty("user.home");
-        Path of = Path.of(path, "backup.csv");
+        Path of = Path.of("backup.csv");
         FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile(new File(String.valueOf(of)));
         System.out.println("Эпики");
         System.out.println(newManager.getAllEpics());
@@ -274,6 +252,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         manager.getTask(secondTask5.getId());
         manager.getTask(secondTask6.getId());
         manager.getTask(secondTask7.getId());
+        manager.deleteSubtaskById(1);
+        manager.deleteEpicById(1);
+        System.out.println(newManager.getHistory());
+        System.out.println("правильная история :)");
+        System.out.println(manager.getHistory());
         System.out.println(newManager.getHistory());
         System.out.println("правильная история :)");
         System.out.println(manager.getHistory());
