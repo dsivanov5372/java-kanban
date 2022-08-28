@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/FileBackedTasksManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/FileBackedTasksManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/FileTaskReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileTaskReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/HistoryManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/HistoryManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/InMemoryTaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Epic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/EpicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/EpicTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Subtask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Subtask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Task.java" afterDir="false" />
-    </list>
+    <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,22 +55,24 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.FileBackedTasksManagerTest and 1 more">
-    <configuration name="FileBackedTasksManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="managment.FileBackedTasksManager" />
+    <configuration name="Kanban" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="managment.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Kanban" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="EpicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.EpicTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -125,22 +111,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileBackedTasksManagerTest.historyShouldBeEmptyWhenLoadFromFileWithEmptyHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.FileBackedTasksManagerTest" />
-      <option name="METHOD_NAME" value="historyShouldBeEmptyWhenLoadFromFileWithEmptyHistory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FileBackedTasksManagerTest.loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
@@ -157,21 +127,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="HistoryManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HistoryManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Kanban" />
-      <item itemvalue="Application.FileBackedTasksManager" />
+      <item itemvalue="JUnit.EpicTest" />
       <item itemvalue="JUnit.FileBackedTasksManagerTest" />
       <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
       <item itemvalue="JUnit.FileBackedTasksManagerTest.loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" />
-      <item itemvalue="JUnit.FileBackedTasksManagerTest.historyShouldBeEmptyWhenLoadFromFileWithEmptyHistory" />
+      <item itemvalue="JUnit.HistoryManagerTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
-        <item itemvalue="JUnit.FileBackedTasksManagerTest.loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" />
+        <item itemvalue="JUnit.HistoryManagerTest" />
+        <item itemvalue="JUnit.FileBackedTasksManagerTest" />
+        <item itemvalue="JUnit.EpicTest" />
         <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
-        <item itemvalue="Application.FileBackedTasksManager" />
-        <item itemvalue="JUnit.FileBackedTasksManagerTest.historyShouldBeEmptyWhenLoadFromFileWithEmptyHistory" />
       </list>
     </recent_temporary>
   </component>
