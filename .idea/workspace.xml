@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="" />
+    <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_9_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup.csv" beforeDir="false" afterPath="$PROJECT_DIR$/backup.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hw.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hw.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/FileTaskReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileTaskReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/Managers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TaskManagerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,8 +25,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -36,12 +49,14 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;managment.TaskManagerTest&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-17&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -54,7 +69,7 @@
       <recent name="tasks" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FileBackedTasksManagerTest and 1 more">
+  <component name="RunManager" selected="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById">
     <configuration name="Kanban" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="hw" />
@@ -62,7 +77,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EpicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HTTPTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
         <pattern>
@@ -71,13 +86,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.EpicTest" />
+      <option name="MAIN_CLASS_NAME" value="test.HTTPTaskManagerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileBackedTasksManagerTest and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HttpTaskServerTest.serversShouldBeEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
         <pattern>
@@ -86,48 +101,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.TaskManagerTest" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="test.FileBackedTasksManagerTest" />
-        <pattern testClass="test.InMemoryTaskManagerTest" />
-      </patterns>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FileBackedTasksManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.FileBackedTasksManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FileBackedTasksManagerTest.loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.FileBackedTasksManagerTest" />
-      <option name="METHOD_NAME" value="loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" />
+      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="serversShouldBeEmpty" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HistoryManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
         <pattern>
@@ -136,27 +117,60 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.HistoryManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="shouldReturnEmptyArrayIfManagerIsEmpty" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="shouldReturnEmptyArraysIfTasksDeletedById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="shouldReturnTasksWhichGotWithTheirId" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Kanban" />
-      <item itemvalue="JUnit.EpicTest" />
-      <item itemvalue="JUnit.FileBackedTasksManagerTest" />
-      <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
-      <item itemvalue="JUnit.FileBackedTasksManagerTest.loadEpicWithoutSubtasksFromFileToManagerWithoutSubtasks" />
-      <item itemvalue="JUnit.HistoryManagerTest" />
+      <item itemvalue="JUnit.HTTPTaskManagerTest" />
+      <item itemvalue="JUnit.HttpTaskServerTest.serversShouldBeEmpty" />
+      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" />
+      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" />
+      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
-        <item itemvalue="JUnit.HistoryManagerTest" />
-        <item itemvalue="JUnit.FileBackedTasksManagerTest" />
-        <item itemvalue="JUnit.EpicTest" />
-        <item itemvalue="JUnit.FileBackedTasksManagerTest and 1 more" />
+        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" />
+        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" />
+        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" />
+        <item itemvalue="JUnit.HttpTaskServerTest.serversShouldBeEmpty" />
+        <item itemvalue="JUnit.HTTPTaskManagerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -185,15 +199,14 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.net.ConnectException" package="java.net" />
+          <option name="timeStamp" value="45" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/managment/FileBackedTasksManager.java</url>
-          <line>255</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/FileBackedTasksManagerTest.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="34" />
+          <url>file://$PROJECT_DIR$/src/server/HttpTaskServer.java</url>
+          <line>150</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

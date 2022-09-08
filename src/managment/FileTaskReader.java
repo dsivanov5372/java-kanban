@@ -56,7 +56,7 @@ public class FileTaskReader {
         }
 
         try (FileWriter writer = new FileWriter(String.valueOf(fileToSaveData), StandardCharsets.UTF_8)){
-            String params = "id,type,name,status,description,epic\n";
+            String params = "id,type,name,status,description,epic,duration,start_time\n";
             writer.write(params);
 
             for (Task task : tasks){
@@ -67,7 +67,7 @@ public class FileTaskReader {
                 writer.write(manager.toString(epic) + "\n");
                 ArrayList<Integer> subtaskId = epic.getSubtasksId();
                 for (int id : subtaskId){
-                    Subtask subtask = manager.getSubtask(id);
+                    Subtask subtask = manager.getSubtaskWithoutHistory(id);
                     writer.write(manager.toString(subtask) + "\n");
                 }
             }

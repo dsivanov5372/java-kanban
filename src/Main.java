@@ -1,16 +1,32 @@
+import adapters.DurationAdapter;
+import adapters.LocalDateTimeAdapter;
+import com.google.gson.*;
 import managment.TaskManager;
 import managment.Managers;
+import server.KVServer;
 import tasks.*;
+
+import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        KVServer server = new KVServer();
+        server.start();
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Duration.class, new DurationAdapter());
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
+        Gson gson = builder.create();
 
         Epic firstEpic = new Epic("Сдать летнюю сессию", "Заботать все предметы, чтобы не вылететь из вуза");
         Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
-        TaskManager manager = Managers.getDefault();
+        TaskManager manager = Managers.getDefault("http://localhost:8078/");
         manager.makeEpic(firstEpic);
         manager.makeEpic(secondEpic);
 
-        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS);
+        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS,
+                            Duration.ofMinutes(30), LocalDateTime.of(2003, 1, 28, 20, 15));
         Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники", Status.NEW);
         manager.makeTask(firstTask);
         manager.makeTask(secondTask);
@@ -26,11 +42,11 @@ public class Main {
         manager.makeSubtask(thirdSubtask);
 
         System.out.println("Печать всех задач");
-        System.out.println(manager.getAllTasks());
+        System.out.println(gson.toJson(manager.getAllTasks()));
         System.out.println("Печать всех эпиков");
-        System.out.println(manager.getAllEpics());
+        System.out.println(gson.toJson(manager.getAllEpics()));
         System.out.println("Печать всех подзадач");
-        System.out.println(manager.getAllSubtasks());
+        System.out.println(gson.toJson(manager.getAllSubtasks()));
 
         System.out.println("Поменяем статус у подзадачи");
         thirdSubtask.setStatus(Status.NEW);

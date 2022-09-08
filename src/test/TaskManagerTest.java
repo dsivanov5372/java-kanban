@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 abstract class TaskManagerTest<T extends TaskManager>{
 
-    protected final T manager;
+    protected T manager;
 
     public TaskManagerTest(T manager){
         this.manager = manager;
@@ -176,7 +176,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
         Subtask subtask2 = new Subtask("test", "test", Status.NEW, epic2);
         manager.makeSubtask(subtask1);
         manager.makeSubtask(subtask2);
-        manager.deleteAllSubtasksOfEpics(epic2);
+        manager.deleteAllSubtasksOfEpic(epic2);
         assertTrue(epic2.getSubtasksId().isEmpty());
         assertTrue(epic1.getSubtasksId().contains(subtask1.getId()));
         assertEquals(1, manager.getAllSubtasks().size());

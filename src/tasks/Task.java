@@ -16,6 +16,8 @@ public class Task {
         this.title = title;
         this.details = details;
         this.status = status;
+        duration = null;
+        startTime = null;
     }
 
     public Task(String title, String details, Status status, Duration duration, LocalDateTime startTime){
@@ -41,9 +43,12 @@ public class Task {
 
     @Override
     public String toString(){
-        return "{title: " + title + "\ndetails: " + details + "\n"
-                + "id: " + id + "\nstatus: " + status +
-                "\nstart: " + startTime +"\nend:" + getEndTime() +"}";
+        if (duration != null && startTime != null){
+            return "{\"title\":\"" + title + "\",\"details\":\"" + details + "\",\"status\":\"" + status + "\"," +
+                    "\"duration\":\"" + duration + "\",\"startTime\":\"" + startTime + "\"}";
+        }
+        return "{\"title\":\"" + title + "\",\"details\":\"" + details + "\",\"status\":\"" + status + "\"," +
+                "\"duration\":null,\"startTime\":null";
     }
 
     public LocalDateTime getEndTime(){

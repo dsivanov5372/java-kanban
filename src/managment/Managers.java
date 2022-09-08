@@ -1,10 +1,11 @@
 package managment;
 
-public class Managers {
-    public static TaskManager getDefault(){
-        return new InMemoryTaskManager();
-    }
+import java.io.IOException;
 
+public class Managers {
+    public static TaskManager getDefault(String url) throws IOException, InterruptedException {
+        return new HTTPTaskManager(url);
+    }
     public static HistoryManager getDefaultHistory(){
         return new InMemoryHistoryManager();
     }

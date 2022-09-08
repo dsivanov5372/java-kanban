@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 
 public class InMemoryTaskManager implements TaskManager {
     protected final HistoryManager historyManager;
-    protected final HashMap<Integer, Task> tasks;
-    protected final HashMap<Integer, Epic> epics;
-    protected final HashMap<Integer, Subtask> subtasks;
+    protected HashMap<Integer, Task> tasks;
+    protected HashMap<Integer, Epic> epics;
+    protected HashMap<Integer, Subtask> subtasks;
     protected final TreeSet<Task> prioritizedTasksSet;
     private int idSetter = 1;
 
@@ -43,7 +43,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void makeEpic(Epic epic){
-        if (epic != null && findIntersect(epic)) {
+        if (epic != null && findIntersect(epic) && epic.getId() == 0) {
             epic.setId(idSetter);
             idSetter++;
             epics.put(epic.getId(), epic);
@@ -52,7 +52,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void makeTask(Task task){
-        if (task != null && findIntersect(task)) {
+        if (task != null && findIntersect(task) && task.getId() == 0) {
             task.setId(idSetter);
             idSetter++;
             tasks.put(task.getId(), task);
@@ -62,7 +62,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void makeSubtask(Subtask subtask){
-        if (subtask != null && subtask.getParentEpic() != -1 && findIntersect(subtask)) {
+        if (subtask != null && subtask.getParentEpic() != -1 && findIntersect(subtask) && subtask.getId() == 0) {
             subtask.setId(idSetter);
             idSetter++;
             subtasks.put(subtask.getId(), subtask);
@@ -110,7 +110,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteAllEpics(){
         for (Epic epic : epics.values()){
-            deleteAllSubtasksOfEpics(epic);
+            deleteAllSubtasksOfEpic(epic);
             historyManager.remove(epic.getId());
         }
         epics.clear();
@@ -127,7 +127,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteAllSubtasksOfEpics(Epic epic){
+    public void deleteAllSubtasksOfEpic(Epic epic){
         if (epic != null) {
             for (int subtask : epic.getSubtasksId()){
                 Subtask task = subtasks.get(subtask);
@@ -168,7 +168,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateEpic(Epic epic){
-        if (epic != null && findIntersect(epic)) {
+        if (epic != null && findIntersect(epic) && epics.containsKey(epic.getId())) {
             ArrayList<Subtask> newSubtasks = new ArrayList<>();
             for (int id : epic.getSubtasksId()) {
                 newSubtasks.add(subtasks.get(id));
@@ -186,8 +186,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateTask(Task task){
-        if (task != null && findIntersect(task)) {
-            prioritizedTasksSet.remove(tasks.get(task.getId()));
+        if (task != null && findIntersect(task) && tasks.containsKey(task.getId())) {
+            if (prioritizedTasksSet.contains(task)){
+                prioritizedTasksSet.remove(tasks.get(task.getId()));
+            }
             tasks.put(task.getId(), task);
             prioritizedTasksSet.add(task);
         }
@@ -195,8 +197,11 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateSubtask(Subtask subtask){
-        if (subtask != null && epics.containsKey(subtask.getParentEpic()) && findIntersect(subtask)){
-            prioritizedTasksSet.remove(subtasks.get(subtask.getId()));
+        if (subtask != null && epics.containsKey(subtask.getParentEpic()) &&
+                findIntersect(subtask) && subtasks.containsKey(subtask.getId())){
+            if (prioritizedTasksSet.contains(subtask)){
+                prioritizedTasksSet.remove(subtasks.get(subtask.getId()));
+            }
             subtasks.put(subtask.getId(), subtask);
             prioritizedTasksSet.add(subtask);
             Epic parentEpic = epics.get(subtask.getParentEpic());
@@ -288,7 +293,7 @@ public class InMemoryTaskManager implements TaskManager {
         return epics.get(id);
     }
 
-    private boolean findIntersect(Task task){
+    protected boolean findIntersect(Task task){
         if (task.getStartTime() != null && task.getDuration() != null) {
             for (Task anotherTask : prioritizedTasksSet) {
                 if (anotherTask.getStartTime() != null && anotherTask.getDuration() != null){

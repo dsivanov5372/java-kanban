@@ -54,8 +54,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
     }
 
     @Override
-    public void deleteAllSubtasksOfEpics(Epic epic){
-        super.deleteAllSubtasksOfEpics(epic);
+    public void deleteAllSubtasksOfEpic(Epic epic){
+        super.deleteAllSubtasksOfEpic(epic);
         FileTaskReader.save(this);
     }
 
@@ -93,6 +93,13 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
     public void deleteSubtaskById(int id){
         super.deleteSubtaskById(id);
         FileTaskReader.save(this);
+    }
+
+    public Subtask getSubtaskWithoutHistory(int id){
+        if (subtasks.containsKey(id)){
+            return subtasks.get(id);
+        }
+        return null;
     }
 
     private String getParentEpicId(Task task){

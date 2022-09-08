@@ -28,7 +28,7 @@ public interface TaskManager {
 
     void deleteAllSubtasks();
 
-    void deleteAllSubtasksOfEpics(Epic epic);
+    void deleteAllSubtasksOfEpic(Epic epic);
 
     Epic getEpic(int id);
 
