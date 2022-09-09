@@ -19,26 +19,7 @@ public class InMemoryTaskManager implements TaskManager {
         epics = new HashMap<>();
         subtasks = new HashMap<>();
         historyManager = Managers.getDefaultHistory();
-        prioritizedTasksSet = new TreeSet<>((o1, o2) -> {
-            LocalDateTime time1 = o1.getStartTime();
-            LocalDateTime time2 = o2.getStartTime();
-            if ((time1 == null && time2 == null)){
-                return -1;
-            }
-            if (time1 == null){
-                return -1;
-            }
-            if (time2 == null){
-                return 1;
-            }
-            if (time1.isBefore(time2)){
-                return -1;
-            }
-            if (time1.equals(time2)){
-                return 0;
-            }
-            return 1;
-        });
+        prioritizedTasksSet = new TreeSet<>();
     }
 
     @Override
@@ -66,8 +47,13 @@ public class InMemoryTaskManager implements TaskManager {
             subtask.setId(idSetter);
             idSetter++;
             subtasks.put(subtask.getId(), subtask);
+
             Epic parentEpic = epics.get(subtask.getParentEpic());
-            parentEpic.addSubtask(subtask, getAllSubtaskOfEpic(parentEpic.getId()));
+            parentEpic.addSubtask(subtask);
+            ArrayList<Subtask> allSubtasks = getAllSubtaskOfEpic(parentEpic.getId());
+            parentEpic.changeStatus(allSubtasks);
+            parentEpic.updateDuration(allSubtasks);
+
             prioritizedTasksSet.add(subtask);
         }
     }

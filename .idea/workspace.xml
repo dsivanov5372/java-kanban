@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a007b80a-d915-4a4c-b9e2-c3585d60f916" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_9_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backup.csv" beforeDir="false" afterPath="$PROJECT_DIR$/backup.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hw.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hw.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileBackedTasksManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/FileTaskReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/FileTaskReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managment/HTTPTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/HTTPTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/Managers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tasks/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Epic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TaskManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +63,40 @@
       <recent name="tasks" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById">
+  <component name="RunManager" selected="JUnit.InMemoryTaskManagerTest">
     <configuration name="Kanban" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="hw" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EpicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.EpicTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileBackedTasksManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.FileBackedTasksManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -92,7 +116,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HttpTaskServerTest.serversShouldBeEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HttpTaskServerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
         <pattern>
@@ -102,13 +126,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="test" />
       <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
-      <option name="METHOD_NAME" value="serversShouldBeEmpty" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw" />
       <extension name="coverage">
         <pattern>
@@ -117,60 +140,27 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
-      <option name="METHOD_NAME" value="shouldReturnEmptyArrayIfManagerIsEmpty" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
-      <option name="METHOD_NAME" value="shouldReturnEmptyArraysIfTasksDeletedById" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.HttpTaskServerTest" />
-      <option name="METHOD_NAME" value="shouldReturnTasksWhichGotWithTheirId" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="test.InMemoryTaskManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Kanban" />
+      <item itemvalue="JUnit.FileBackedTasksManagerTest" />
       <item itemvalue="JUnit.HTTPTaskManagerTest" />
-      <item itemvalue="JUnit.HttpTaskServerTest.serversShouldBeEmpty" />
-      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" />
-      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" />
-      <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" />
+      <item itemvalue="JUnit.HttpTaskServerTest" />
+      <item itemvalue="JUnit.InMemoryTaskManagerTest" />
+      <item itemvalue="JUnit.EpicTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArraysIfTasksDeletedById" />
-        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnEmptyArrayIfManagerIsEmpty" />
-        <item itemvalue="JUnit.HttpTaskServerTest.shouldReturnTasksWhichGotWithTheirId" />
-        <item itemvalue="JUnit.HttpTaskServerTest.serversShouldBeEmpty" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest" />
+        <item itemvalue="JUnit.EpicTest" />
         <item itemvalue="JUnit.HTTPTaskManagerTest" />
+        <item itemvalue="JUnit.FileBackedTasksManagerTest" />
+        <item itemvalue="JUnit.HttpTaskServerTest" />
       </list>
     </recent_temporary>
   </component>

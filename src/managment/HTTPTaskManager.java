@@ -63,6 +63,12 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         return manager;
     }
 
+    private void saveHistory(){
+        ArrayList<Integer> toSave = new ArrayList<>();
+        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
+        client.put(defaultKey + "History", gson.toJson(toSave));
+    }
+
     @Override
     public void makeEpic(Epic epic){
         if (epic != null && findIntersect(epic) && epic.getId() == 0) {
@@ -103,9 +109,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         }
         super.deleteAllTasks();
         client.put(defaultKey + "Tasks", gson.toJson(tasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -119,9 +123,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         client.put(defaultKey + "Epics", gson.toJson(epics));
         super.deleteAllEpics();
         client.put(defaultKey + "Subtasks", gson.toJson(subtasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -135,9 +137,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         }
         client.put(defaultKey + "Epics", gson.toJson(epics));
         client.put(defaultKey + "Subtasks", gson.toJson(subtasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -151,9 +151,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
 
             client.put(defaultKey + "Epics", gson.toJson(epics));
             client.put(defaultKey + "Subtasks", gson.toJson(subtasks));
-            ArrayList<Integer> toSave = new ArrayList<>();
-            historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-            client.put(defaultKey + "History", gson.toJson(toSave));
+            saveHistory();
         }
     }
 
@@ -199,9 +197,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         client.remove(String.valueOf(id));
         client.put(defaultKey + "Epics", gson.toJson(epics));
         client.put(defaultKey + "Subtasks", gson.toJson(subtasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -209,9 +205,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         super.deleteTaskById(id);
         client.remove(String.valueOf(id));
         client.put(defaultKey + "Tasks", gson.toJson(tasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -225,9 +219,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         client.remove(String.valueOf(id));
         client.put(defaultKey + "Epics", gson.toJson(epics));
         client.put(defaultKey + "Subtasks", gson.toJson(subtasks));
-        ArrayList<Integer> toSave = new ArrayList<>();
-        historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-        client.put(defaultKey + "History", gson.toJson(toSave));
+        saveHistory();
     }
 
     @Override
@@ -235,9 +227,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         Epic epic = epics.get(id);
         if (epic != null) {
             historyManager.add(epic);
-            ArrayList<Integer> toSave = new ArrayList<>();
-            historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-            client.put(defaultKey + "History", gson.toJson(toSave));
+            saveHistory();
         }
         return epic;
     }
@@ -247,9 +237,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         Task task = tasks.get(id);
         if (task != null) {
             historyManager.add(task);
-            ArrayList<Integer> toSave = new ArrayList<>();
-            historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-            client.put(defaultKey + "History", gson.toJson(toSave));
+            saveHistory();
         }
         return task;
     }
@@ -259,9 +247,7 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         Subtask subtask = subtasks.get(id);
         if (subtask != null) {
             historyManager.add(subtask);
-            ArrayList<Integer> toSave = new ArrayList<>();
-            historyManager.getHistory().forEach(obj -> toSave.add(obj.getId()));
-            client.put(defaultKey + "History", gson.toJson(toSave));
+            saveHistory();
         }
         return subtask;
     }

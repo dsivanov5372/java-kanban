@@ -38,28 +38,8 @@ public class Epic extends Task {
     }
 
     public void updateDuration(ArrayList<Subtask> subtasks){
-        TreeSet<Subtask> set = new TreeSet<>((o1, o2) -> {
-            LocalDateTime time1 = o1.getStartTime();
-            LocalDateTime time2 = o2.getStartTime();
-            if ((time1 == null && time2 == null)){
-                return -1;
-            }
-            if (time1 == null){
-                return -1;
-            }
-            if (time2 == null){
-                return 1;
-            }
-            if (time1.isBefore(time2)){
-                return -1;
-            }
-            if (time1.equals(time2)){
-                return 0;
-            }
-            return 1;
-        });
 
-        set.addAll(subtasks);
+        TreeSet<Subtask> set = new TreeSet<>(subtasks);
 
         Subtask lastSubtask = set.last();
         Subtask firstSubtask = set.first();
@@ -80,14 +60,11 @@ public class Epic extends Task {
         }
     }
 
-    public void addSubtask(Subtask subtask, ArrayList<Subtask> subtasks){
+    public void addSubtask(Subtask subtask){
         if(subtasksId == null){
             subtasksId = new ArrayList<>();
         }
         this.subtasksId.add(subtask.getId());
-        subtasks.add(subtask);
-        updateDuration(subtasks);
-        changeStatus(subtasks);
     }
 
     public void changeStatus(ArrayList<Subtask> subtasks){

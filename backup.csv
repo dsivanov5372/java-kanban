@@ -1,2 +1,5 @@
 id,type,name,status,description,epic,duration,start_time
+1,TASK,test,NEW,test,,null,null
+2,EPIC,test,NEW,test,,null,null
+3,SUBTASK,test,NEW,test,2,null,null
 
