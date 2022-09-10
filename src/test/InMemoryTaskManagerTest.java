@@ -20,11 +20,11 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
 
     @Test
     public void shouldAddToHistoryExistedTasks(){
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         Epic epic = new Epic("test", "test");
         manager.makeTask(task);
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         manager.addToHistory(task.getId());
         manager.addToHistory(epic.getId());
@@ -58,7 +58,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
 
     @Test
     public void shouldAddTaskIfNotNull(){
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         task.setId(2222);
         manager.addTask(task);
         assertEquals(task, manager.getTask(2222));
@@ -74,7 +74,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     public void shouldAddSubtaskIfNotNull(){
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         subtask.setId(2222);
         manager.addSubtask(subtask);
         assertEquals(subtask, manager.getSubtask(2222));
@@ -88,7 +88,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
 
     @Test
     public void shouldNotAddSubtaskIfParentEpicNull(){
-        Subtask subtask = new Subtask("test", "test", Status.NEW, null);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, null, null, null);
         subtask.setId(2222);
         manager.addSubtask(subtask);
         assertTrue(manager.getAllSubtasks().isEmpty());

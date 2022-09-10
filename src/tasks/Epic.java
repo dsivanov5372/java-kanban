@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 public class Epic extends Task {
-    ArrayList<Integer> subtasksId;
+    ArrayList<Integer> subtasksId = new ArrayList<>();
     
     public Epic(String title, String details) {
-        super(title, details, Status.NEW);
+        super(title, details, Status.NEW, null, null);
         duration = null;
         startTime = null;
     }
@@ -30,9 +30,6 @@ public class Epic extends Task {
 
     @Override
     public String toString(){
-        if(subtasksId == null){
-            subtasksId = new ArrayList<>();
-        }
         return "{" + super.toString() + "\nSubtasks id list: " + subtasksId.toString() +
                 "\nstart: " + startTime +"\nend:" + getEndTime() +"}";
     }
@@ -61,9 +58,6 @@ public class Epic extends Task {
     }
 
     public void addSubtask(Subtask subtask){
-        if(subtasksId == null){
-            subtasksId = new ArrayList<>();
-        }
         this.subtasksId.add(subtask.getId());
     }
 
@@ -107,9 +101,6 @@ public class Epic extends Task {
     }
 
     public ArrayList<Integer> getSubtasksId(){
-        if(subtasksId == null){
-            subtasksId = new ArrayList<>();
-        }
         return subtasksId;
     }
 }

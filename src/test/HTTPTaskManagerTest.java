@@ -42,11 +42,11 @@ public class HTTPTaskManagerTest extends TaskManagerTest<HTTPTaskManager>{
 
     @Test
     public void restoreManagerFromServer() throws IOException, InterruptedException {
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task);
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         manager.getTask(task.getId());
         manager.getSubtask(subtask.getId());

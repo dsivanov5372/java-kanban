@@ -27,16 +27,17 @@ public class Main {
 
         Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS,
                             Duration.ofMinutes(30), LocalDateTime.of(2003, 1, 28, 20, 15));
-        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники", Status.NEW);
+        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы, квадрики и коники",
+                                    Status.NEW, null, null);
         manager.makeTask(firstTask);
         manager.makeTask(secondTask);
 
         Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы, квадрики и коники",
-                Status.IN_PROGRESS, firstEpic);
+                Status.IN_PROGRESS, firstEpic, null, null);
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
-                Status.IN_PROGRESS, firstEpic);
+                Status.IN_PROGRESS, firstEpic, null, null);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять, как долго смогу поголодать",
-                Status.DONE, firstEpic);
+                Status.DONE, firstEpic, null, null);
         manager.makeSubtask(firstSubtask);
         manager.makeSubtask(secondSubtask);
         manager.makeSubtask(thirdSubtask);

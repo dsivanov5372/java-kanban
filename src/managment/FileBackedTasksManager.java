@@ -152,13 +152,13 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
             return epic;
         } else if (params[1].equals("SUBTASK")){
             Subtask subtask = new Subtask(params[2], params[4], Status.valueOf(params[3]),
-                                            super.findById(Integer.parseInt(params[5])));
+                                            super.findById(Integer.parseInt(params[5])), null, null);
             subtask.setId(Integer.parseInt(params[0]));
             subtask.setDuration(duration);
             subtask.setStartTime(start);
             return subtask;
         } else {
-            Task task = new Task(params[2], params[4], Status.valueOf(params[3]));
+            Task task = new Task(params[2], params[4], Status.valueOf(params[3]), null, null);
             task.setId(Integer.parseInt(params[0]));
             task.setDuration(duration);
             task.setStartTime(start);
@@ -193,20 +193,20 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         Epic secondEpic = new Epic("Купить подарок", "Купить подарок для своего одногруппника");
         manager.makeEpic(firstEpic);
         manager.makeEpic(secondEpic);
-        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS);
-        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask2 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask3 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask4 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask5 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask6 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask7 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask8 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask9 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask10 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask11 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask12 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
-        Task secondTask13 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW);
+        Task firstTask = new Task("Уборка", "Собрать вещи для переезда в СПб на месяц", Status.IN_PROGRESS, null, null);
+        Task secondTask = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask2 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask3 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask4 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask5 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask6 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask7 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask8 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask9 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask10 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask11 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask12 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
+        Task secondTask13 = new Task("Собрать вещи", "Заботать линейные операторы квадрики и коники", Status.NEW, null, null);
         manager.makeTask(firstTask);
         manager.makeTask(secondTask);
         manager.makeTask(secondTask2);
@@ -224,9 +224,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager{
         Subtask firstSubtask = new Subtask("Заботать линал", "Заботать линейные операторы квадрики и коники",
                 Status.IN_PROGRESS, firstEpic, Duration.ofMinutes(30), LocalDateTime.of(2003, 1, 28, 9, 30));
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
-                Status.IN_PROGRESS, firstEpic);
+                Status.IN_PROGRESS, firstEpic, null, null);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять как долго смогу поголодать",
-                Status.DONE, firstEpic);
+                Status.DONE, firstEpic, null, null);
         manager.makeSubtask(firstSubtask);
         manager.makeSubtask(secondSubtask);
         manager.makeSubtask(thirdSubtask);

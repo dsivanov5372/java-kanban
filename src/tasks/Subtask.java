@@ -7,13 +7,6 @@ import java.util.Objects;
 public class Subtask extends Task {
     private int parentEpic = -1;
 
-    public Subtask(String title, String details, Status status, Epic parentEpic) {
-        super(title, details, status);
-        if (parentEpic != null) {
-            this.parentEpic = parentEpic.getId();
-        }
-    }
-
     public Subtask(String title, String details, Status status, Epic parentEpic,
                    Duration duration, LocalDateTime startTime){
         super(title, details, status, duration, startTime);

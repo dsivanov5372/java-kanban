@@ -50,11 +50,11 @@ public class HttpTaskServerTest {
         URI subtask = URI.create("http://localhost:8080/tasks/subtask/");
 
         Epic task1 = new Epic("test", "test");
-        Task task2 = new Task("test", "test", Status.NEW);
+        Task task2 = new Task("test", "test", Status.NEW, null, null);
         HttpRequest send1 = HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(task1))).uri(epic).build();
         HttpRequest send2 = HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(task2))).uri(task).build();
         task1.setId(1);
-        Subtask task3 = new Subtask("test", "test", Status.NEW, task1);
+        Subtask task3 = new Subtask("test", "test", Status.NEW, task1, null, null);
         HttpRequest send3 = HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(task3))).uri(subtask).build();
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse.BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();

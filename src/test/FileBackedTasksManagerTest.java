@@ -60,9 +60,9 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
 
     @Test
     public void historyShouldBeEmptyWhenLoadFromFileWithEmptyHistory(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
+        Task task1 = new Task("test", "test", Status.NEW, null, null);
+        Task task2 = new Task("test", "test", Status.NEW, null, null);
+        Task task3 = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task1);
         manager.makeTask(task2);
         manager.makeTask(task3);
@@ -81,10 +81,10 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
                 Status.IN_PROGRESS, firstEpic, duration, time);
         manager.makeSubtask(firstSubtask);
         Subtask secondSubtask = new Subtask("Заботать Архитектуру ЭВМ", "Что такое топология звезда?",
-                Status.IN_PROGRESS, firstEpic);
+                Status.IN_PROGRESS, firstEpic, null, null);
         manager.makeSubtask(secondSubtask);
         Subtask thirdSubtask = new Subtask("Выбрать бюджет", "Понять как долго смогу поголодать",
-                Status.DONE, firstEpic);
+                Status.DONE, firstEpic, null, null);
         manager.makeSubtask(thirdSubtask);
         FileTaskReader.save(manager);
         FileBackedTasksManager newManager = FileBackedTasksManager.loadFromFile(fileToLoadFrom);

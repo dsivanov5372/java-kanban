@@ -41,7 +41,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldMakeTaskIfNotNull(){
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task);
         assertNotEquals(0, task.getId());
     }
@@ -56,7 +56,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldMakeSubtaskIfNotNull(){
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.DONE, epic);
+        Subtask subtask = new Subtask("test", "test", Status.DONE, epic, null, null);
         manager.makeSubtask(subtask);
         assertNotEquals(0, subtask.getId());
         assertEquals(subtask.getParentEpic(), epic.getId());
@@ -71,7 +71,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldNotMakeSubtaskIfHasNoParentEpic(){
-        Subtask subtask = new Subtask("test", "test", Status.NEW, null);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, null, null, null);
         manager.makeSubtask(subtask);
         assertEquals(-1, subtask.getParentEpic());
         assertEquals(0, manager.getAllSubtasks().size());
@@ -101,8 +101,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldReturnNotEmptyArrayIfHasTasks(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
+        Task task1 = new Task("test", "test", Status.NEW, null, null);
+        Task task2 = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task1);
         manager.makeTask(task2);
         ArrayList<Task> arr = manager.getAllTasks();
@@ -120,7 +120,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldReturnNotEmptyArrayIfContainsSubtasks(){
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         ArrayList<Subtask> arr = manager.getAllSubtasks();
         assertTrue(arr.contains(subtask));
@@ -143,7 +143,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldReturnNotEmptyArrayIfEpicHavesSubtasks(){
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         ArrayList<Subtask> arr = manager.getAllSubtaskOfEpic(epic.getId());
         assertTrue(arr.contains(subtask));
@@ -156,8 +156,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
         Epic epic2 = new Epic("test", "test");
         manager.makeEpic(epic1);
         manager.makeEpic(epic2);
-        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1);
-        Subtask subtask2 = new Subtask("test", "test", Status.NEW, epic2);
+        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1, null, null);
+        Subtask subtask2 = new Subtask("test", "test", Status.NEW, epic2, null, null);
         manager.makeSubtask(subtask1);
         manager.makeSubtask(subtask2);
         manager.deleteAllSubtasks();
@@ -172,8 +172,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
         Epic epic2 = new Epic("test", "test");
         manager.makeEpic(epic1);
         manager.makeEpic(epic2);
-        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1);
-        Subtask subtask2 = new Subtask("test", "test", Status.NEW, epic2);
+        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1, null, null);
+        Subtask subtask2 = new Subtask("test", "test", Status.NEW, epic2, null, null);
         manager.makeSubtask(subtask1);
         manager.makeSubtask(subtask2);
         manager.deleteAllSubtasksOfEpic(epic2);
@@ -217,9 +217,9 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldUpdateTaskIfNotNull(){
-        Task task1 = new Task("test", "test", Status.NEW);
+        Task task1 = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task1);
-        Task task2 = new Task("text", "text", Status.NEW);
+        Task task2 = new Task("test", "test", Status.NEW, null, null);
         task2.setId(task1.getId());
         manager.updateTask(task2);
         assertEquals(task2, manager.getTask(task1.getId()));
@@ -227,7 +227,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldNotUpdateTaskIfNull(){
-        Task task1 = new Task("test", "test", Status.NEW);
+        Task task1 = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task1);
         manager.updateTask(null);
         assertEquals(task1, manager.getTask(task1.getId()));
@@ -237,8 +237,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldUpdateSubtaskIfNotNull(){
         Epic epic1 = new Epic("test", "test");
         manager.makeEpic(epic1);
-        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1);
-        Subtask subtask2 = new Subtask("text", "text", Status.DONE, epic1);
+        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1, null, null);
+        Subtask subtask2 = new Subtask("text", "text", Status.DONE, epic1, null, null);
         manager.makeSubtask(subtask1);
         subtask2.setId(subtask1.getId());
         manager.updateSubtask(subtask2);
@@ -249,7 +249,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldNotUpdateSubtaskIfNull(){
         Epic epic1 = new Epic("test", "test");
         manager.makeEpic(epic1);
-        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1);
+        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1, null, null);
         manager.makeSubtask(subtask1);
         manager.updateSubtask(null);
         assertEquals(subtask1, manager.getSubtask(subtask1.getId()));
@@ -285,7 +285,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldDeleteTaskIfContains(){
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task);
         manager.deleteTaskById(task.getId());
         assertNull(manager.getTask(task.getId()));
@@ -293,8 +293,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldNotChangeTaskHashMapIfNotContains(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
+        Task task1 = new Task("test", "test", Status.NEW, null, null);
+        Task task2 = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task1);
         manager.makeTask(task2);
         manager.deleteTaskById(222222);
@@ -315,7 +315,7 @@ abstract class TaskManagerTest<T extends TaskManager>{
     public void shouldDeleteSubtaskIfContains(){
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         manager.deleteSubtaskById(subtask.getId());
         assertNull(manager.getSubtask(subtask.getId()));
@@ -328,8 +328,8 @@ abstract class TaskManagerTest<T extends TaskManager>{
         Epic epic2 = new Epic("test", "test");
         manager.makeEpic(epic1);
         manager.makeEpic(epic2);
-        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1);
-        Subtask subtask2 = new Subtask("text", "text", Status.DONE, epic2);
+        Subtask subtask1 = new Subtask("test", "test", Status.NEW, epic1, null, null);
+        Subtask subtask2 = new Subtask("text", "text", Status.DONE, epic2, null, null);
         manager.makeSubtask(subtask1);
         manager.makeSubtask(subtask2);
         manager.deleteSubtaskById(2222222);
@@ -363,12 +363,12 @@ abstract class TaskManagerTest<T extends TaskManager>{
 
     @Test
     public void shouldReturnHistoryWithTasks(){
-        Task task = new Task("test", "test", Status.NEW);
+        Task task = new Task("test", "test", Status.NEW, null, null);
         manager.makeTask(task);
         manager.getTask(task.getId());
         Epic epic = new Epic("test", "test");
         manager.makeEpic(epic);
-        Subtask subtask = new Subtask("test", "test", Status.NEW, epic);
+        Subtask subtask = new Subtask("test", "test", Status.NEW, epic, null, null);
         manager.makeSubtask(subtask);
         manager.getEpic(epic.getId());
         manager.getSubtask(subtask.getId());

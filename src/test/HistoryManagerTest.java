@@ -11,11 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HistoryManagerTest {
-    HistoryManager manager;
+    private HistoryManager manager;
+    private Task task1;
+    private Task task2;
+    private Task task3;
 
     @BeforeEach
     public void makeManager(){
         manager = new InMemoryHistoryManager();
+        task1 = new Task("test", "test", Status.NEW, null, null);
+        task2 = new Task("test", "test", Status.NEW, null, null);
+        task3 = new Task("test", "test", Status.NEW, null, null);
     }
 
     @Test
@@ -25,9 +31,6 @@ class HistoryManagerTest {
 
     @Test
     public void tasksShouldBeAddedInTheTailOfQuery(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         task3.setId(3);
@@ -44,8 +47,6 @@ class HistoryManagerTest {
 
     @Test
     public void historyShouldContainOnlyOneTaskIfDuplicate(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         manager.add(task1);
@@ -62,9 +63,6 @@ class HistoryManagerTest {
 
     @Test
     public void moveTasksToTheTailIfWasDuplicated(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         task3.setId(3);
@@ -82,9 +80,6 @@ class HistoryManagerTest {
 
     @Test
     public void headShouldBeNextTaskInHistoryIfDeleteHead(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         task3.setId(3);
@@ -101,9 +96,6 @@ class HistoryManagerTest {
 
     @Test
     public void tailShouldBePreviousTaskInHistoryIfDeleteTail(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         task3.setId(3);
@@ -120,9 +112,6 @@ class HistoryManagerTest {
 
     @Test
     public void historyShouldContain2TasksAfterDeletingMiddleOne(){
-        Task task1 = new Task("test", "test", Status.NEW);
-        Task task2 = new Task("test", "test", Status.NEW);
-        Task task3 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         task2.setId(2);
         task3.setId(3);
@@ -139,7 +128,6 @@ class HistoryManagerTest {
 
     @Test
     public void historyShouldBeEmptyAfterDeletingSingleTask(){
-        Task task1 = new Task("test", "test", Status.NEW);
         task1.setId(1);
         manager.add(task1);
         manager.remove(task1.getId());

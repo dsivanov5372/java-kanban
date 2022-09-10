@@ -12,14 +12,6 @@ public class Task implements Comparable<Task>{
     protected int id = 0;
     protected Status status;
 
-    public Task(String title, String details, Status status){
-        this.title = title;
-        this.details = details;
-        this.status = status;
-        duration = null;
-        startTime = null;
-    }
-
     public Task(String title, String details, Status status, Duration duration, LocalDateTime startTime){
         this.title = title;
         this.details = details;
@@ -32,22 +24,10 @@ public class Task implements Comparable<Task>{
     public int compareTo(Task obj) {
         LocalDateTime time1 = this.getStartTime();
         LocalDateTime time2 = obj.getStartTime();
-        if ((time1 == null && time2 == null)){
-            return -1;
-        }
         if (time1 == null){
             return -1;
         }
-        if (time2 == null){
-            return 1;
-        }
-        if (time1.isBefore(time2)){
-            return -1;
-        }
-        if (time1.equals(time2)){
-            return 0;
-        }
-        return 1;
+        return time1.compareTo(time2);
     }
 
     @Override
